@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f4ebdd">
+<title>Memora &mdash; 一生，溫柔珍藏</title>
+<meta name="description" content="Memora 是為長者設計的溫暖大字回憶日記，可與家人共享。高擬真 UI 概念。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23B6533B'/%3E%3Cpath d='M13 19c7-3 13-2 19 2v27c-6-4-12-5-19-2V19Zm38 0c-7-3-13-2-19 2v27c6-4 12-5 19-2V19Z' fill='%23FFF6E8'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="fixes.css">
+  <link rel="stylesheet" href="revision.css">
+</head>
+<body>
+<svg class="sprite" aria-hidden="true">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="m3.5 10.4 8.5-7 8.5 7v9.1a1.7 1.7 0 0 1-1.7 1.7H5.2a1.7 1.7 0 0 1-1.7-1.7Z"/><path d="M9.3 21.2v-6.4a2.7 2.7 0 0 1 5.4 0v6.4"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M2.8 20.2c.2-3.7 2.8-6.1 6.2-6.1s6 2.4 6.2 6.1"/><path d="M15.4 5.2a3 3 0 0 1 0 5.7"/><path d="M17.2 14.4c2.3.4 3.8 2.5 4 5.2"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M3.2 5.6c3.4-1.4 6.2-.8 8.8 1.1 2.6-1.9 5.4-2.5 8.8-1.1v13.2c-3.4-1.4-6.2-.8-8.8 1.1-2.6-1.9-5.4-2.5-8.8-1.1Z"/><path d="M12 6.7v13.2"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.1"/><path d="M19 13.8a7.6 7.6 0 0 0 0-3.6l2-1.5-2-3.4-2.4 1a7.3 7.3 0 0 0-3.1-1.8L13.2 2H9.8l-.3 2.5a7.3 7.3 0 0 0-3.1 1.8l-2.4-1-2 3.4 2 1.5a7.6 7.6 0 0 0 0 3.6l-2 1.5 2 3.4 2.4-1a7.3 7.3 0 0 0 3.1 1.8l.3 2.5h3.4l.3-2.5a7.3 7.3 0 0 0 3.1-1.8l2.4 1 2-3.4Z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4.5v15M4.5 12h15"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18.3 9.5a6.3 6.3 0 0 0-12.6 0c0 6-2.2 7.3-2.2 7.3h17S18.3 15.5 18.3 9.5Z"/><path d="M9.8 20.1a2.6 2.6 0 0 0 4.4 0"/></symbol>
+  <symbol id="i-chev-down" viewBox="0 0 24 24"><path d="m5.5 9 6.5 6.5L18.5 9"/></symbol>
+  <symbol id="i-chev-left" viewBox="0 0 24 24"><path d="M15 5 8 12l7 7"/></symbol>
+  <symbol id="i-chev-right" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4.5 12h15M13 5.5l6.5 6.5L13 18.5"/></symbol>
+  <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M6 18 18 6M8 6h10v10"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2.8" width="6" height="11.2" rx="3"/><path d="M5.8 11.5a6.2 6.2 0 0 0 12.4 0M12 17.8v3.4M8.6 21.2h6.8"/></symbol>
+  <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="2.2" y="5.5" width="19.6" height="13" rx="3"/><path d="M6 9h.01M9.5 9h.01M13 9h.01M16.5 9h.01M20 9h.01M6 12.3h.01M9.5 12.3h.01M13 12.3h.01M16.5 12.3h.01M20 12.3h.01M7.5 15.5h9"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="2.8" y="3.8" width="18.4" height="16.4" rx="3.2"/><circle cx="8.4" cy="9.1" r="1.7"/><path d="m3.8 17 5.3-5.3a1.8 1.8 0 0 1 2.5 0l2.2 2.2 1.8-1.8a1.8 1.8 0 0 1 2.5 0l3.9 3.9"/></symbol>
+  <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5.5l11-2v12.2"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="15.7" r="3"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7.1 3.5 9.8 8 7.9 9.9c1.1 2.4 3.8 5.1 6.2 6.2l1.9-1.9 4.5 2.7-.9 2.4a2.8 2.8 0 0 1-3.1 1.8C9.7 19.8 4.2 14.3 2.9 7.5A2.8 2.8 0 0 1 4.7 4.4Z"/></symbol>
+  <symbol id="i-phone-off" viewBox="0 0 24 24"><path d="M7.1 3.5 9.8 8 7.9 9.9c1.1 2.4 3.8 5.1 6.2 6.2l1.9-1.9 4.5 2.7-.9 2.4a2.8 2.8 0 0 1-3.1 1.8C9.7 19.8 4.2 14.3 2.9 7.5A2.8 2.8 0 0 1 4.7 4.4Z"/><path d="m3 3 18 18"/></symbol>
+  <symbol id="i-speaker" viewBox="0 0 24 24"><path d="M4 9.5h3.4L12 5.6v12.8L7.4 14.5H4Z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18.2 6.3a8 8 0 0 1 0 11.4"/></symbol>
+  <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9.5h3.4L12 5.6v12.8L7.4 14.5H4Z"/><path d="m16 9 5 5M21 9l-5 5"/></symbol>
+  <symbol id="i-captions" viewBox="0 0 24 24"><rect x="2.5" y="4.5" width="19" height="15" rx="3.4"/><path d="M10.4 9.2a3 3 0 0 0 0 5.6M17 9.2a3 3 0 0 0 0 5.6"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 2.8c.6 4.5 2.9 6.8 7.4 7.4-4.5.6-6.8 2.9-7.4 7.4-.6-4.5-2.9-6.8-7.4-7.4 4.5-.6 6.8-2.9 7.4-7.4Z"/><path d="M19.4 16.2c.2 1.6 1.1 2.5 2.7 2.7-1.6.2-2.5 1.1-2.7 2.7-.2-1.6-1.1-2.5-2.7-2.7 1.6-.2 2.5-1.1 2.7-2.7Z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z" class="fill"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6.8" y="5" width="3.6" height="14" rx="1.2" class="fill"/><rect x="13.6" y="5" width="3.6" height="14" rx="1.2" class="fill"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.7"/><path d="m15.5 15.5 5 5"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="11" rx="3"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/><path d="M12 14.5v2.6"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.6 12S6 6.2 12 6.2 21.4 12 21.4 12 18 17.8 12 17.8 2.6 12 2.6 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3 21 21"/><path d="M9.9 5.5A9.5 9.5 0 0 1 12 5.2c6 0 9.4 6.8 9.4 6.8a16 16 0 0 1-2.7 3.4M6.7 7.1A15 15 0 0 0 2.6 12S6 18.8 12 18.8c1.2 0 2.3-.3 3.4-.8"/><path d="M10 10a2.8 2.8 0 0 0 4 4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m4.5 12.5 5 5 10-11"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4.5 6.5h15M9.2 6.5V4.2h5.6v2.3M6.5 6.5l.8 13.2a1.7 1.7 0 0 0 1.7 1.6h6a1.7 1.7 0 0 0 1.7-1.6l.8-13.2M10 10.5v7M14 10.5v7"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 24 24"><path d="m4 20 1.2-5L16.4 3.8a2.2 2.2 0 0 1 3.1 0l.7.7a2.2 2.2 0 0 1 0 3.1L9 18.8Z"/><path d="M14.8 5.4 18.6 9.2"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15.5V3.2M8 7.2l4-4 4 4"/><path d="M5.5 11.5v7.2a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-7.2"/></symbol>
+  <symbol id="i-film" viewBox="0 0 24 24"><rect x="2.8" y="4.2" width="18.4" height="15.6" rx="2.8"/><path d="M7.2 4.5v15M16.8 4.5v15M3 9.2h4.2M3 14.8h4.2M16.8 9.2H21M16.8 14.8H21"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.3M12 19.7V22M2 12h2.3M19.7 12H22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M19.1 4.9l-1.6 1.6M6.5 17.5l-1.6 1.6"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19.5 12h-15M11 5.5 4.5 12l6.5 6.5"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.2" class="fill"/><circle cx="12" cy="12" r="1.2" class="fill"/><circle cx="19" cy="12" r="1.2" class="fill"/></symbol>
+  <symbol id="i-user-plus" viewBox="0 0 24 24"><circle cx="9.3" cy="8" r="3.4"/><path d="M2.8 20.6c.2-4 2.8-6.5 6.5-6.5 2 0 3.6.7 4.7 1.9"/><path d="M18.5 13.5v6M15.5 16.5h6"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2.6"/><path d="M16 8V6a2.5 2.5 0 0 0-2.5-2.5h-7A2.5 2.5 0 0 0 4 6v7a2.5 2.5 0 0 0 2.5 2.5H8"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.8a5.3 5.3 0 0 0-7.5 0L12 6.1l-1.3-1.3a5.3 5.3 0 0 0-7.5 7.5L12 21l8.8-8.7a5.3 5.3 0 0 0 0-7.5Z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.4l3.5 2.1"/></symbol>
+  <symbol id="i-headphones" viewBox="0 0 24 24"><path d="M3.6 14v-2a8.4 8.4 0 0 1 16.8 0v2"/><rect x="2.8" y="13.5" width="4.2" height="7" rx="2.1"/><rect x="17" y="13.5" width="4.2" height="7" rx="2.1"/></symbol>
+  <symbol id="i-wand" viewBox="0 0 24 24"><path d="m4 20 11.5-11.5M14.2 4.1l.5 2.3 2.3.5-2.3.5-.5 2.3-.5-2.3-2.3-.5 2.3-.5ZM19.4 11.2l.3 1.4 1.4.3-1.4.3-.3 1.4-.3-1.4-1.4-.3 1.4-.3Z"/><path d="m13 4.2 2.4 6.4 6.4 2.4-6.4 2.4-2.4 6.4-2.4-6.4L4.2 13l6.4-2.4Z" opacity=".25"/></symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 1 9-9c0 2.3-1.8 3.2-3.3 3.2h-1.6a2.1 2.1 0 0 0-1.5 3.6c.7.8.2 2.2-1.6 2.2Z"/><circle cx="7.5" cy="10" r="1" class="fill"/><circle cx="10" cy="6.5" r="1" class="fill"/><circle cx="14.2" cy="6.5" r="1" class="fill"/><circle cx="16.8" cy="9.5" r="1" class="fill"/></symbol>
+  <symbol id="i-volume-off" viewBox="0 0 24 24"><path d="M4 9.5h3.4L12 5.6v12.8L7.4 14.5H4Z"/><path d="m16 9 5 5M21 9l-5 5"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path d="M9.5 6.5C6 7.6 4 10 4 13.4c0 2.5 1.5 4.1 3.7 4.1 2 0 3.4-1.4 3.4-3.3 0-1.9-1.3-3.2-3.1-3.2-.3 0-.6 0-.9.1.5-1.7 1.8-2.9 3.7-3.6ZM19 6.5c-3.5 1.1-5.5 3.5-5.5 6.9 0 2.5 1.5 4.1 3.7 4.1 2 0 3.4-1.4 3.4-3.3 0-1.9-1.3-3.2-3.1-3.2-.3 0-.6 0-.9.1.5-1.7 1.8-2.9 3.7-3.6Z"/></symbol>
+</svg>
+
+<div class="studio">
+  <aside class="rail" aria-label="概念導覽">
+    <a class="brand" href="#" data-go="home" aria-label="Memora 首頁">
+      <span class="brand-mark"><svg><use href="#i-book"/></svg></span>
+      <span class="brand-word">memora</span>
+    </a>
+    <p class="rail-kicker">一生，溫柔珍藏</p>
+    <div class="rail-rule"></div>
+    <nav class="screen-index" id="screenIndex">
+      <button class="index-item is-active" data-go="home"><span>01</span>首頁</button>
+      <button class="index-item" data-go="chat"><span>02</span>與 Momo 聊聊</button>
+      <button class="index-item" data-go="call"><span>03</span>陪伴通話</button>
+      <button class="index-item" data-go="family"><span>04</span>家人</button>
+      <button class="index-item" data-go="book"><span>05</span>人生之書</button>
+      <button class="index-item" data-go="chapter"><span>06</span>章節頁</button>
+      <button class="index-item" data-go="memory"><span>07</span>回憶頁</button>
+      <button class="index-item" data-go="music"><span>08</span>音樂</button>
+      <button class="index-item" data-go="film"><span>09</span>回憶影片</button>
+      <button class="index-item" data-go="settings"><span>10</span>設定</button>
+      <button class="index-item" data-go="welcome"><span>11</span>歡迎</button>
+    </nav>
+    <div class="rail-foot">
+      <span class="live-dot"></span>
+      <span>互動介面概念 · 2026</span>
+    </div>
+  </aside>
+
+  <main class="stage">
+    <div class="stage-glow stage-glow--one"></div>
+    <div class="stage-glow stage-glow--two"></div>
+    <div class="device" id="device">
+      <div class="device-screen" id="deviceScreen">
+        <div class="statusbar" id="statusbar">
+          <span class="status-time">9:41</span>
+          <span class="status-icons">
+            <svg viewBox="0 0 18 12" aria-hidden="true"><rect x="0" y="8" width="3" height="4" rx="1" class="fill"/><rect x="5" y="5.6" width="3" height="6.4" rx="1" class="fill"/><rect x="10" y="3" width="3" height="9" rx="1" class="fill"/><rect x="15" y="0" width="3" height="12" rx="1" class="fill" opacity=".35"/></svg>
+            <svg viewBox="0 0 16 12" aria-hidden="true"><path d="M1 4.4a10 10 0 0 1 14 0M3.7 7.1a6.2 6.2 0 0 1 8.6 0M6.4 9.8a2.4 2.4 0 0 1 3.2 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11.2" r=".9" class="fill"/></svg>
+            <svg viewBox="0 0 26 12" aria-hidden="true"><rect x="1" y="1.4" width="21" height="9.2" rx="2.8" fill="none" stroke="currentColor" stroke-width="1.4"/><rect x="3.2" y="3.6" width="14.6" height="4.8" rx="1.4" class="fill"/><path d="M23.8 4.3v3.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </span>
+        </div>
+
+        <div class="screens" id="screens">
+
+          <!-- 01 &middot; HOME -->
+          <section class="screen screen--home" data-screen="home" aria-label="首頁">
+            <div class="screen-scroll home-scroll">
+              <header class="home-head">
+                <div class="home-topline">
+                  <div class="eyebrow eyebrow--date"><svg><use href="#i-sun"/></svg> 11月19日 星期四</div>
+                </div>
+                <div class="home-title-row">
+                  <h1>晚上好，<br><em>Maggie。</em></h1>
+                  <button class="avatar avatar--me" data-go="settings" aria-label="開啟 Margaret 的個人資料">
+                    <span>M</span><i class="avatar-pip"></i>
+                  </button>
+                </div>
+              </header>
+
+              <button class="talk-card" data-go="chat">
+                <span class="talk-orbit talk-orbit--a"></span>
+                <span class="talk-orbit talk-orbit--b"></span>
+                <span class="talk-copy">
+                  <span class="talk-title">與 Momo<br>聊聊</span>
+                  <span class="talk-button"><svg><use href="#i-mic"/></svg> 開始</span>
+                </span>
+                <img class="talk-momo" src="assets/momo.png" alt="Momo，一本會微笑的書">
+              </button>
+
+              <div class="section-line section-line--tight">
+                <h2>也可以從這裡開始</h2>
+              </div>
+
+              <div class="start-list">
+                <button class="start-row" data-sheet="photo-picker">
+                  <span class="start-row-visual start-row-visual--photo" aria-hidden="true">
+                    <img src="assets/photos/lake.jpg" alt="">
+                    <img src="assets/photos/rings.jpg" alt="">
+                  </span>
+                  <span class="start-row-copy">
+                    <strong>從照片開始</strong>
+                    <small>翻看舊照片，想當年</small>
+                  </span>
+                  <svg class="start-row-arrow"><use href="#i-arrow-right"/></svg>
+                </button>
+                <button class="start-row" data-go="music">
+                  <span class="start-row-visual start-row-visual--music" aria-hidden="true">
+                    <span class="start-row-vinyl"><i></i></span>
+                  </span>
+                  <span class="start-row-copy">
+                    <strong>從音樂開始</strong>
+                    <small>聽一首當年的老歌</small>
+                  </span>
+                  <svg class="start-row-arrow"><use href="#i-arrow-right"/></svg>
+                </button>
+              </div>
+
+              <div class="bottom-air"></div>
+            </div>
+          </section>
+
+          <!-- 02 &middot; CHAT -->
+          <section class="screen screen--chat" data-screen="chat" data-tabs="false" aria-label="與 Momo 聊聊">
+            <header class="subhead chat-head">
+              <button class="icon-button" data-go="home" aria-label="關閉對話"><svg><use href="#i-chev-down"/></svg></button>
+              <button class="chat-heading" data-sheet="chat-settings" aria-label="對話設定">
+                <span class="eyebrow">童年 · 1962</span>
+                <strong>與 Momo <svg><use href="#i-chev-down"/></svg></strong>
+              </button>
+              <button class="chat-call-button" data-go="call" aria-label="與 Momo 通話"><svg><use href="#i-phone"/></svg></button>
+              <button class="finish-button" data-sheet="finish-sheet">完成</button>
+            </header>
+
+            <div class="chat-scroll" id="chatScroll">
+              <div class="chat-day">今天</div>
+
+              <div class="message message--momo">
+                <div class="momo-avatar"><img src="assets/momo.png" alt=""></div>
+                <div class="bubble bubble--momo">
+                  <p>午安，Maggie。我一直在想柳樹街上的那間廚房。</p>
+                  <p>你走進去時，先聞到什麼味道？</p>
+                </div>
+              </div>
+
+              <div class="message message--me">
+                <div class="bubble bubble--me">
+                  <p>肉桂。還有雨打在窗上的味道。媽媽總是在陰天烤東西。</p>
+                </div>
+              </div>
+
+              <div class="message message--momo">
+                <div class="momo-avatar"><img src="assets/momo.png" alt=""></div>
+                <div class="bubble bubble--momo">
+                  <p>這個細節真美。那時候藍色水壺已經在爐子上了嗎？</p>
+                </div>
+              </div>
+
+              <div class="message message--me">
+                <div class="bubble bubble--me">
+                  <p>對，而且收音機總是開得有點太大聲。</p>
+                </div>
+              </div>
+
+              <div class="message message--momo">
+                <div class="momo-avatar"><img src="assets/momo.png" alt=""></div>
+                <div class="bubble bubble--momo bubble--with-photo">
+                  <div class="chat-photo"><img src="assets/photos/kitchen.jpg" alt="溫暖的廚房插畫，有肉桂捲和咖啡"><span>柳樹街 · 1962</span></div>
+                  <p>我把這張照片和你的故事放在一起了。要加上你記得的那首歌嗎？</p>
+                </div>
+              </div>
+
+              <div class="message message--me">
+                <div class="bubble bubble--me bubble--music">
+                  <div class="chat-song">
+                    <span class="mini-vinyl"><i></i></span>
+                    <span><strong>Moon River</strong><small>Andy Williams &middot; 1961</small></span>
+                    <button class="tiny-play" aria-label="試聽 Moon River"><svg><use href="#i-play"/></svg></button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="typing-indicator" id="typingIndicator" hidden>
+                <span></span><span></span><span></span> Momo 正在聽              </div>
+              <div class="chat-end-space"></div>
+            </div>
+
+            <div class="chat-composer" id="chatComposer">
+              <div class="composer-tools">
+                <button class="tool-button" data-sheet="attach-sheet" aria-label="新增照片或音樂"><svg><use href="#i-plus"/></svg></button>
+                <button class="composer-field" data-keyboard aria-label="輸入訊息"><span>輸入訊息…</span><svg class="field-keyboard"><use href="#i-keyboard"/></svg></button>
+                <button class="composer-mic" id="holdToTalk" aria-label="按住說話"><svg><use href="#i-mic"/></svg><span>按住</span></button>
+              </div>
+            </div>
+
+            <div class="keyboard" id="keyboard" hidden>
+              <div class="keyboard-top"><span></span><button class="keyboard-done" data-keyboard-close aria-label="收起鍵盤"><svg><use href="#i-chev-down"/></svg></button></div>
+              <div class="key-row" data-key-row="qwerty"></div>
+              <div class="key-row key-row--mid" data-key-row="asdf"></div>
+              <div class="key-row" data-key-row="zxcv"></div>
+              <div class="key-row key-row--bottom">
+                <button class="key key--small" data-key="123">123</button>
+                <button class="key key--space" data-key=" ">空格</button>
+                <button class="key key--send" id="keyboardSend">傳送</button>
+              </div>
+            </div>
+
+            <div class="recording-overlay" id="recordingOverlay" hidden>
+              <div class="recording-card">
+                <div class="recording-ripple"></div>
+                <button class="recording-mic" aria-label="錄音"><svg><use href="#i-mic"/></svg></button>
+                <p class="recording-time" id="recordingTime">0:00</p>
+                <h2>我在聽…</h2>
+                <p>放開即可傳送</p>
+                <div class="waveform waveform--live" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 03 &middot; CALL -->
+          <section class="screen screen--call has-text" data-screen="call" data-tabs="false" data-theme="dark" aria-label="陪伴通話">
+            <div class="call-bg" aria-hidden="true">
+              <span class="call-sun"></span><span class="call-hill call-hill--one"></span><span class="call-hill call-hill--two"></span>
+              <span class="call-speck call-speck--a"></span><span class="call-speck call-speck--b"></span><span class="call-speck call-speck--c"></span>
+            </div>
+            <header class="subhead call-head">
+              <button class="icon-button icon-button--dark" id="callClose" aria-label="結束通話"><svg><use href="#i-chev-down"/></svg></button>
+              <div class="call-heading"><span>Momo</span><small id="callTimer">04:12</small></div>
+              <span class="call-head-spacer" aria-hidden="true"></span>
+            </header>
+
+            <div class="call-stage">
+              <div class="call-frame">
+                <span class="frame-glow"></span>
+                <div class="mascot-wrap" id="callMascotWrap">
+                  <img class="call-momo" src="assets/momo.png" alt="Momo，一本會微笑的書">
+                </div>
+                <span class="call-ring call-ring--one"></span>
+                <span class="call-ring call-ring--two"></span>
+              </div>
+            </div>
+
+            <div class="call-caption" id="callCaption">
+              <div class="call-lines" id="callLines" aria-live="polite"></div>
+            </div>
+
+            <div class="call-controls">
+              <button class="call-control" id="callMute" aria-pressed="false"><span><svg><use href="#i-mic"/></svg></span><em class="control-label">靜音</em></button>
+              <button class="call-control is-on" id="callSpeaker" aria-pressed="true"><span><svg><use href="#i-speaker"/></svg></span><em class="control-label">朗讀</em></button>
+              <button class="call-control is-on" id="callText" aria-pressed="true"><span><svg><use href="#i-captions"/></svg></span><em class="control-label">文字</em></button>
+              <button class="call-control call-control--end" id="callEnd"><span><svg><use href="#i-phone-off"/></svg></span><em class="control-label">掛斷</em></button>
+            </div>
+          </section>
+
+          <!-- 04 &middot; FAMILY -->
+          <section class="screen screen--family" data-screen="family" aria-label="家人">
+            <div class="screen-scroll">
+              <header class="page-head">
+                <div>
+                  <h1>家人</h1>
+                </div>
+                <button class="add-button" data-sheet="add-family-sheet" aria-label="新增家人"><svg><use href="#i-user-plus"/></svg><span>新增</span></button>
+              </header>
+
+              <section class="panel panel--circle">
+                <div class="family-row">
+                  <button class="person" data-member="Eleanor">
+                    <span class="avatar avatar--rose">E</span>
+                    <strong>Eleanor</strong><small>女兒</small>
+                  </button>
+                  <button class="person" data-member="Daniel">
+                    <span class="avatar avatar--sage">D</span>
+                    <strong>Daniel</strong><small>兒子</small>
+                  </button>
+                  <button class="person" data-member="Emma">
+                    <span class="avatar avatar--honey">Em</span>
+                    <strong>Emma</strong><small>孫女</small>
+                  </button>
+                  <button class="person person--add" data-sheet="add-family-sheet">
+                    <span class="avatar avatar--add"><svg><use href="#i-plus"/></svg></span>
+                    <strong>新增家人</strong>
+                  </button>
+                </div>
+              </section>
+
+              <div class="section-line section-line--tight">
+                <h2>相簿</h2>
+              </div>
+
+              <button class="album-card album-card--shared" data-album="shared">
+                <div class="album-art">
+                  <img src="assets/photos/lake.jpg" alt=""><img src="assets/photos/beach.jpg" alt=""><img src="assets/photos/garden.jpg" alt=""><img src="assets/photos/car.jpg" alt="">
+                </div>
+                <div class="album-copy">
+                  <span class="album-badge"><svg><use href="#i-users"/></svg> 與 3 人共享</span>
+                  <h2>家庭相簿</h2>
+                </div>
+              </button>
+
+              <button class="album-card album-card--private" data-album="private">
+                <div class="album-art album-art--private">
+                  <span class="private-veil"><svg><use href="#i-lock"/></svg></span>
+                  <img src="assets/photos/kitchen.jpg" alt=""><img src="assets/photos/rings.jpg" alt="">
+                </div>
+                <div class="album-copy">
+                  <span class="album-badge"><svg><use href="#i-lock"/></svg> 只有你</span>
+                  <h2>我的私人相簿</h2>
+                </div>
+              </button>
+
+              <div class="section-line section-line--tight">
+                <h2>無聲動態</h2>
+              </div>
+
+              <div class="activity-card" id="activityCard">
+                <div class="activity-top">
+                  <span class="eyebrow"><svg><use href="#i-eye"/></svg> 家人動態</span>
+                  <span class="activity-time">12 分鐘前</span>
+                </div>
+                <button class="activity-reveal" id="activityReveal" aria-expanded="false">
+                  <span class="reveal-avatar">Em</span>
+                  <span class="reveal-copy">
+                    <strong id="activityTitle">有人看過一段回憶</strong>
+                  </span>
+                  <span class="reveal-action" id="activityAction">查看</span>
+                </button>
+                <div class="activity-hidden" id="activityHidden">
+                  <div class="blurred-title" aria-hidden="true">柳樹街上的廚房</div>
+                </div>
+                <div class="activity-memory" id="activityMemory" hidden>
+                  <img src="assets/photos/kitchen.jpg" alt="">
+                  <span><strong>Emma</strong> 看過 <em>《柳樹街上的廚房》</em></span>
+                  <button class="mini-open" data-go="memory">開啟</button>
+                </div>
+              </div>
+
+              <div class="bottom-air"></div>
+            </div>
+          </section>
+
+          <!-- 05 &middot; BOOK -->
+                    <section class="screen screen--book" data-screen="book" aria-label="人生之書">
+            <div class="screen-scroll book-screen">
+              <div class="book-cover-view" id="bookCoverView">
+                <header class="page-head page-head--book book-cover-head">
+                  <div>
+                    <span class="eyebrow">我的回憶庫</span>
+                    <h1>我的人生<br><em>回憶書。</em></h1>
+                  </div>
+                  <button class="icon-button icon-button--paper" data-sheet="book-settings" aria-label="書本設定"><svg><use href="#i-more"/></svg></button>
+                </header>
+
+                <div class="memoir-stage">
+                  <div class="memoir-cover" id="memoirCover">
+                    <span class="cover-spine" aria-hidden="true"></span>
+                    <span class="cover-rings" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                    <div class="cover-photo-frame">
+                      <img src="assets/photos/kitchen.jpg" alt="柳樹街上的廚房">
+                      <span class="cover-photo-caption">柳樹街 · 1962</span>
+                    </div>
+                    <div class="cover-plaque">
+                      <span class="cover-kicker">MEMORA</span>
+                      <h2>Maggie 的<br>人生回憶書</h2>
+                      <span class="cover-author">Margaret Chen 著</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="cover-meta">
+                  <span><svg><use href="#i-book"/></svg>42 則回憶</span>
+                  <i aria-hidden="true"></i>
+                  <span><svg><use href="#i-book"/></svg>6 個人生篇章</span>
+                </div>
+
+                <div class="cover-actions">
+                  <button data-sheet="book-settings"><svg><use href="#i-pencil"/></svg>設定書名</button>
+                  <i aria-hidden="true"></i>
+                  <button data-sheet="book-settings"><svg><use href="#i-image"/></svg>設定封面</button>
+                </div>
+
+                <button class="open-book" data-book-open>
+                  <svg><use href="#i-book"/></svg>
+                  打開閱讀
+                  <svg><use href="#i-arrow-right"/></svg>
+                </button>
+
+                <div class="bottom-air"></div>
+              </div>
+
+              <div class="book-pages-view" id="bookPagesView" hidden>
+<header class="page-head page-head--book">
+                <div>
+                  <h1>一生，<br><em>分成篇章。</em></h1>
+                </div>
+                <div class="book-head-actions">
+                  <button class="icon-button icon-button--paper" data-book-cover aria-label="回到封面"><svg><use href="#i-chev-left"/></svg></button>
+                  <button class="icon-button icon-button--paper" data-sheet="book-settings" aria-label="書本設定"><svg><use href="#i-more"/></svg></button>
+                </div>
+              </header>
+
+              <div class="book-wrap">
+                <div class="book-page-edge book-page-edge--back"></div>
+                <div class="book-page-edge book-page-edge--mid"></div>
+                <article class="book-page" id="bookPage">
+                  <span class="book-ribbon"></span>
+                  <span class="book-stitches" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                  <div class="page-running-head"><span>目錄</span><span>i</span></div>
+                  <h2 class="book-title">Margaret 的<br>歲月之書</h2>
+
+                  <ol class="toc">
+                    <li><button class="toc-row" data-chapter="Childhood">
+                      <span class="toc-num">01</span>
+                      <span class="toc-thumb"><img src="assets/photos/kitchen.jpg" alt=""></span>
+                      <span class="toc-copy"><strong>童年</strong><small>1948–1962 · 12 則回憶</small></span>
+                      <svg><use href="#i-chev-right"/></svg>
+                    </button></li>
+                    <li><button class="toc-row" data-chapter="Becoming Me">
+                      <span class="toc-num">02</span>
+                      <span class="toc-thumb"><img src="assets/photos/car.jpg" alt=""></span>
+                      <span class="toc-copy"><strong>成為自己</strong><small>1962–1968 · 7 則回憶</small></span>
+                      <svg><use href="#i-chev-right"/></svg>
+                    </button></li>
+                    <li><button class="toc-row" data-chapter="Love &amp; Family">
+                      <span class="toc-num">03</span>
+                      <span class="toc-thumb"><img src="assets/photos/rings.jpg" alt=""></span>
+                      <span class="toc-copy"><strong>愛與家人</strong><small>1968–1985 · 10 則回憶</small></span>
+                      <svg><use href="#i-chev-right"/></svg>
+                    </button></li>
+                    <li><button class="toc-row" data-chapter="Work &amp; Purpose">
+                      <span class="toc-num">04</span>
+                      <span class="toc-thumb"><img src="assets/photos/garden.jpg" alt=""></span>
+                      <span class="toc-copy"><strong>工作與使命</strong><small>1985–2004 · 6 則回憶</small></span>
+                      <svg><use href="#i-chev-right"/></svg>
+                    </button></li>
+                    <li><button class="toc-row" data-chapter="Widening World">
+                      <span class="toc-num">05</span>
+                      <span class="toc-thumb"><img src="assets/photos/beach.jpg" alt=""></span>
+                      <span class="toc-copy"><strong>更寬廣的世界</strong><small>2004–2019 · 5 則回憶</small></span>
+                      <svg><use href="#i-chev-right"/></svg>
+                    </button></li>
+                    <li><button class="toc-row" data-chapter="This Chapter">
+                      <span class="toc-num">06</span>
+                      <span class="toc-thumb"><img src="assets/photos/peonies.jpg" alt=""></span>
+                      <span class="toc-copy"><strong>此刻</strong><small>此刻 · 2 則回憶</small></span>
+                      <svg><use href="#i-chev-right"/></svg>
+                    </button></li>
+                  </ol>
+                  <div class="book-page-foot"><span></span><span class="page-arrows"><button data-chapter="Childhood" aria-label="開啟第一章"><svg><use href="#i-chev-left"/></svg></button><span>1 / 42</span><button data-chapter="Childhood" aria-label="翻頁"><svg><use href="#i-chev-right"/></svg></button></span></div>
+                </article>
+              </div>
+
+              <button class="film-cta" data-go="film">
+                <span class="film-icon"><svg><use href="#i-film"/></svg></span>
+                <span><strong>製作回憶影片</strong></span>
+                <svg class="film-arrow"><use href="#i-arrow-right"/></svg>
+              </button>
+              
+                <div class="bottom-air"></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 06 &middot; CHAPTER -->
+          <section class="screen screen--chapter" data-screen="chapter" data-tabs="false" aria-label="童年章節">
+            <header class="subhead chapter-head">
+              <button class="icon-button" data-book-pages aria-label="返回目錄"><svg><use href="#i-chev-left"/></svg></button>
+              <span class="subhead-title">目錄</span>
+              <button class="icon-button" data-sheet="book-settings" aria-label="章節選項"><svg><use href="#i-more"/></svg></button>
+            </header>
+            <div class="screen-scroll chapter-scroll">
+              <div class="chapter-opening">
+                <span class="eyebrow">第一章 · 1948–1962</span>
+                <h1>童年</h1>
+                <div class="chapter-cover">
+                  <img src="assets/photos/kitchen.jpg" alt="溫暖的廚房，有肉桂捲">
+                </div>
+              </div>
+
+              <div class="chapter-toolbar">
+                <span>12 則回憶</span>
+              </div>
+
+              <div class="memory-list">
+                <button class="memory-row" data-go="memory">
+                  <span class="memory-date"><strong>6月</strong><span>1962</span></span>
+                  <span class="memory-thumb"><img src="assets/photos/kitchen.jpg" alt=""></span>
+                  <span class="memory-copy"><strong>柳樹街上的廚房</strong></span>
+                  <svg><use href="#i-chev-right"/></svg>
+                </button>
+                <button class="memory-row" data-go="memory">
+                  <span class="memory-date"><strong>8月</strong><span>1959</span></span>
+                  <span class="memory-thumb"><img src="assets/photos/garden.jpg" alt=""></span>
+                  <span class="memory-copy"><strong>餐桌上的牡丹</strong></span>
+                  <svg><use href="#i-chev-right"/></svg>
+                </button>
+                <button class="memory-row" data-go="memory">
+                  <span class="memory-date"><strong>5月</strong><span>1957</span></span>
+                  <span class="memory-thumb"><img src="assets/photos/rings.jpg" alt=""></span>
+                  <span class="memory-copy"><strong>母親的手</strong></span>
+                  <svg><use href="#i-chev-right"/></svg>
+                </button>
+                <button class="memory-row" data-go="memory">
+                  <span class="memory-date"><strong>10月</strong><span>1954</span></span>
+                  <span class="memory-thumb"><img src="assets/photos/car.jpg" alt=""></span>
+                  <span class="memory-copy"><strong>開車去看海的那天</strong></span>
+                  <svg><use href="#i-chev-right"/></svg>
+                </button>
+              </div>
+              <button class="film-cta film-cta--chapter" data-go="film">
+                <span class="film-icon"><svg><use href="#i-film"/></svg></span>
+                <span><strong>用這一章製作影片</strong></span>
+                <svg class="film-arrow"><use href="#i-arrow-right"/></svg>
+              </button>
+              <div class="bottom-air"></div>
+            </div>
+            <div class="book-footer-pill"><span>童年</span><span>1 / 6</span><button data-book-pages aria-label="關閉章節">關閉</button></div>
+          </section>
+
+          <!-- 07 &middot; MEMORY -->
+          <section class="screen screen--memory" data-screen="memory" data-tabs="false" aria-label="回憶詳情">
+            <header class="subhead memory-head">
+              <button class="icon-button" data-go="chapter" aria-label="返回童年"><svg><use href="#i-chev-left"/></svg></button>
+              <span class="subhead-title">1962 年 6 月</span>
+              <button class="icon-button" data-sheet="memory-menu" aria-label="回憶選項"><svg><use href="#i-more"/></svg></button>
+            </header>
+            <div class="screen-scroll memory-scroll">
+              <article class="memory-article">
+                <span class="eyebrow">童年</span>
+                <h1>柳樹街上的<br><em>廚房</em></h1>
+
+                <div class="photo-tape">
+                  <img src="assets/photos/kitchen.jpg" alt="溫暖的廚房回憶插畫，有肉桂捲和咖啡">
+                  <span class="tape tape--left"></span><span class="tape tape--right"></span>
+                </div>
+
+                <p class="dropcap"><span>一</span>切總是從水壺開始。那個藍色的壺，把手上有個小缺口，總在雨還沒停之前就放上後爐。</p>
+                <p>母親會在桌邊，袖子上沾著麵粉，慢慢地、篤定地揉著麵團。收音機擺在窗台上，唱得有點太大聲。我會坐在流理台上，看著窗戶一點一點起霧。</p>
+                <p>奇怪的是，我們留下的往往不是整間廚房，而是肉桂的氣味，和雨點打在玻璃上的聲音。</p>
+
+                <button class="read-aloud" data-read><span><svg><use href="#i-speaker"/></svg></span><span><strong>朗讀</strong></span><svg class="read-play"><use href="#i-play"/></svg></button>
+
+                <div class="memory-details">
+                  <div class="chip-row"><span class="chip"><svg><use href="#i-music"/></svg> Moon River</span><span class="chip"><svg><use href="#i-users"/></svg> 母親</span><span class="chip">柳樹街</span></div>
+                  <button class="soft-action" data-sheet="memory-menu"><svg><use href="#i-pencil"/></svg> 編輯</button>
+                </div>
+
+                <div class="private-note"><svg><use href="#i-lock"/></svg> 私人</div>
+              </article>
+              <div class="bottom-air"></div>
+            </div>
+          </section>
+
+          <!-- 08 &middot; MUSIC -->
+          <section class="screen screen--music" data-screen="music" aria-label="音樂">
+            <div class="screen-scroll">
+              <header class="page-head">
+                <div><h1>音樂</h1></div>
+                <button class="icon-button icon-button--paper" data-sheet="identify-sheet" aria-label="辨識歌曲"><svg><use href="#i-headphones"/></svg></button>
+              </header>
+
+              <label class="search-field"><svg><use href="#i-search"/></svg><input type="search" id="musicSearch" placeholder="搜尋歌曲或歌手" aria-label="搜尋音樂"><button class="search-mic" data-sheet="identify-sheet" aria-label="聽歌搜尋"><svg><use href="#i-mic"/></svg></button></label>
+
+              <button class="identify-card" data-sheet="identify-sheet">
+                <span class="identify-icon"><svg><use href="#i-headphones"/></svg></span>
+                <span><strong>不知道歌名？</strong></span>
+                <span class="identify-action">聆聽</span>
+              </button>
+
+              <div class="chosen-card" id="chosenCard">
+                <span class="chosen-art"><span class="mini-vinyl"><i></i></span></span>
+                <span class="chosen-copy"><span class="eyebrow">回憶錄選曲</span><strong id="chosenTitle">Moon River</strong><small id="chosenMeta">Andy Williams &middot; 1961</small></span>
+                <span class="chosen-check"><svg><use href="#i-check"/></svg></span>
+              </div>
+
+              <div class="decade-row" id="decadeRow">
+                <button class="chip-filter is-active" data-decade="all">全部</button>
+                <button class="chip-filter" data-decade="1950">1950</button>
+                <button class="chip-filter" data-decade="1960">1960</button>
+                <button class="chip-filter" data-decade="1970">1970</button>
+                <button class="chip-filter" data-decade="1980">1980</button>
+              </div>
+
+              <div class="song-list" id="songList">
+                <article class="song-row" data-song="Moon River" data-decade="1960">
+                  <span class="album-art album-art--moon"><i></i></span>
+                  <span class="song-copy"><strong>Moon River</strong><small>Andy Williams &middot; 1961</small></span>
+                  <button class="preview-button" data-preview aria-label="試聽 Moon River"><svg><use href="#i-play"/></svg><span>試聽</span></button>
+                  <div class="song-actions"><div class="preview-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><button class="use-button" data-use>選用這首歌</button></div>
+                </article>
+                <article class="song-row" data-song="The Very Thought of You" data-decade="1950">
+                  <span class="album-art album-art--rose"><i></i></span>
+                  <span class="song-copy"><strong>The Very Thought of You</strong><small>Nat King Cole &middot; 1958</small></span>
+                  <button class="preview-button" data-preview aria-label="試聽 The Very Thought of You"><svg><use href="#i-play"/></svg><span>試聽</span></button>
+                  <div class="song-actions"><div class="preview-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><button class="use-button" data-use>選用這首歌</button></div>
+                </article>
+                <article class="song-row" data-song="What a Wonderful World" data-decade="1960">
+                  <span class="album-art album-art--sage"><i></i></span>
+                  <span class="song-copy"><strong>What a Wonderful World</strong><small>Louis Armstrong &middot; 1967</small></span>
+                  <button class="preview-button" data-preview aria-label="試聽 What a Wonderful World"><svg><use href="#i-play"/></svg><span>試聽</span></button>
+                  <div class="song-actions"><div class="preview-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><button class="use-button" data-use>選用這首歌</button></div>
+                </article>
+                <article class="song-row" data-song="La Vie en Rose" data-decade="1950">
+                  <span class="album-art album-art--gold"><i></i></span>
+                  <span class="song-copy"><strong>La Vie en Rose</strong><small>&Eacute;dith Piaf &middot; 1947</small></span>
+                  <button class="preview-button" data-preview aria-label="試聽 La Vie en Rose"><svg><use href="#i-play"/></svg><span>試聽</span></button>
+                  <div class="song-actions"><div class="preview-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><button class="use-button" data-use>選用這首歌</button></div>
+                </article>
+                <article class="song-row" data-song="Stand by Me" data-decade="1960">
+                  <span class="album-art album-art--clay"><i></i></span>
+                  <span class="song-copy"><strong>Stand by Me</strong><small>Ben E. King &middot; 1961</small></span>
+                  <button class="preview-button" data-preview aria-label="試聽 Stand by Me"><svg><use href="#i-play"/></svg><span>試聽</span></button>
+                  <div class="song-actions"><div class="preview-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><button class="use-button" data-use>選用這首歌</button></div>
+                </article>
+              </div>
+              <div class="bottom-air"></div>
+            </div>
+          </section>
+
+          <!-- 09 &middot; FILM -->
+          <section class="screen screen--film" data-screen="film" data-tabs="false" aria-label="製作回憶影片">
+            <header class="subhead film-head">
+              <button class="icon-button" data-book-pages aria-label="關閉影片製作"><svg><use href="#i-x"/></svg></button>
+              <div class="film-heading"><strong>製作回憶</strong></div>
+              <span class="step-pill" id="filmStepPill">1 / 2</span>
+            </header>
+
+            <div class="screen-scroll film-scroll" id="filmStepOne">
+              <h1 class="film-title">選擇<br>片段</h1>
+
+              <div class="film-strip" aria-hidden="true">
+                <span><img src="assets/photos/kitchen.jpg" alt=""></span><span><img src="assets/photos/garden.jpg" alt=""></span><span><img src="assets/photos/rings.jpg" alt=""></span><span><img src="assets/photos/car.jpg" alt=""></span><span><img src="assets/photos/beach.jpg" alt=""></span>
+              </div>
+
+              <div class="select-list">
+                <label class="select-card is-selected">
+                  <input type="checkbox" data-film-memory checked>
+                  <span class="check-circle"><svg><use href="#i-check"/></svg></span>
+                  <img src="assets/photos/kitchen.jpg" alt="">
+                  <span><strong>柳樹街上的廚房</strong><small>童年 · 1962</small></span>
+                </label>
+                <label class="select-card is-selected">
+                  <input type="checkbox" data-film-memory checked>
+                  <span class="check-circle"><svg><use href="#i-check"/></svg></span>
+                  <img src="assets/photos/garden.jpg" alt="">
+                  <span><strong>餐桌上的牡丹</strong><small>童年 · 1959</small></span>
+                </label>
+                <label class="select-card">
+                  <input type="checkbox" data-film-memory>
+                  <span class="check-circle"><svg><use href="#i-check"/></svg></span>
+                  <img src="assets/photos/rings.jpg" alt="">
+                  <span><strong>母親的手</strong><small>童年 · 1957</small></span>
+                </label>
+                <label class="select-card">
+                  <input type="checkbox" data-film-memory>
+                  <span class="check-circle"><svg><use href="#i-check"/></svg></span>
+                  <img src="assets/photos/car.jpg" alt="">
+                  <span><strong>開車去看海的那天</strong><small>童年 · 1954</small></span>
+                </label>
+                <label class="select-card">
+                  <input type="checkbox" data-film-memory>
+                  <span class="check-circle"><svg><use href="#i-check"/></svg></span>
+                  <img src="assets/photos/beach.jpg" alt="">
+                  <span><strong>退潮的海灘</strong><small>童年 · 1952</small></span>
+                </label>
+              </div>
+              <div class="bottom-air"></div>
+            </div>
+
+            <div class="screen-scroll film-scroll" id="filmStepTwo" hidden>
+              <h1 class="film-title">選擇<br>風格</h1>
+              <div class="film-preview-card">
+                <img src="assets/photos/kitchen.jpg" alt="">
+                <div class="film-preview-overlay"><span>童年</span><strong>柳樹街上的廚房</strong></div>
+                <button class="film-play" data-sheet="film-preview-sheet"><svg><use href="#i-play"/></svg></button>
+              </div>
+              <div class="style-grid">
+                <button class="style-tile is-active"><span class="style-swatch style-swatch--warm"></span><strong>暖色影片</strong></button>
+                <button class="style-tile"><span class="style-swatch style-swatch--paper"></span><strong>紙與墨</strong></button>
+                <button class="style-tile"><span class="style-swatch style-swatch--dusk"></span><strong>金色時刻</strong></button>
+              </div>
+              <div class="film-music-row">
+                <span class="chosen-art"><span class="mini-vinyl"><i></i></span></span>
+                <span><span class="eyebrow">音樂</span><strong>Moon River</strong><small>Andy Williams &middot; 1961</small></span>
+                <button class="text-link" data-go="music">更改</button>
+              </div>
+              <div class="film-summary"><span><svg><use href="#i-film"/></svg> 2 段回憶</span><span><svg><use href="#i-clock"/></svg> 約 1 分鐘</span><span><svg><use href="#i-music"/></svg> 1 首歌</span></div>
+              <div class="bottom-air"></div>
+            </div>
+
+            <div class="film-footer" id="filmFooter">
+              <button class="primary-button" id="filmPrimary"><span>選擇音樂</span><svg><use href="#i-arrow-right"/></svg></button>
+            </div>
+          </section>
+
+          <!-- 10 &middot; SETTINGS -->
+          <section class="screen screen--settings" data-screen="settings" aria-label="設定">
+            <div class="screen-scroll">
+              <header class="page-head"><div><h1>設定</h1></div></header>
+
+              <button class="profile-card" data-sheet="profile-sheet">
+                <span class="avatar avatar--me avatar--large">M</span>
+                <span><strong>Margaret Chen</strong><small>「Maggie」· 74</small></span>
+                <svg><use href="#i-chev-right"/></svg>
+              </button>
+
+              <section class="settings-group">
+                <h2 class="group-title">介面</h2>
+                <div class="setting-card">
+                  <div class="setting-row">
+                    <span class="setting-icon setting-icon--clay"><svg><use href="#i-quote"/></svg></span>
+                    <div><strong>語言</strong></div>
+                    <div class="language-switch" role="group" aria-label="語言">
+                      <button class="lang-pill" data-lang="en" title="英文">EN</button>
+                      <button class="lang-pill is-active" data-lang="zh-Hant" title="繁體中文">繁</button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="settings-group">
+                <h2 class="group-title">閱讀與聆聽</h2>
+                <div class="setting-card setting-card--textsize">
+                  <div class="setting-heading"><span class="setting-icon setting-icon--clay"><svg><use href="#i-book"/></svg></span><div><strong>文字大小</strong></div><span class="textsize-value" id="textSizeValue">22 pt</span></div>
+                  <div class="textsize-stage" aria-hidden="true"><span class="aa aa--small">Aa</span><span class="aa aa--mid" id="aaPreview">Aa</span><span class="aa aa--big">Aa</span></div>
+                  <div class="range-row"><button class="range-btn" data-text-step="-1" aria-label="縮小文字">&minus;</button><input type="range" id="textRange" min="20" max="30" step="1" value="22" aria-label="文字大小（pt）"><button class="range-btn" data-text-step="1" aria-label="放大文字">+</button></div>
+                  <div class="range-labels"><span>20</span><span>30</span></div>
+                </div>
+
+                <div class="setting-card">
+                  <div class="setting-row"><span class="setting-icon setting-icon--sage"><svg><use href="#i-speaker"/></svg></span><div><strong>朗讀 Momo</strong></div><button class="switch is-on" data-toggle="readAloud" aria-pressed="true"><span></span></button></div>
+                  <div class="setting-divider"></div>
+                  <button class="setting-row setting-row--link" data-sheet="voice-sheet"><span class="setting-icon setting-icon--honey"><svg><use href="#i-music"/></svg></span><div><strong>Momo 的聲音</strong></div><svg><use href="#i-chev-right"/></svg></button>
+                  <div class="setting-divider"></div>
+                  <div class="setting-row"><span class="setting-icon setting-icon--peach"><svg><use href="#i-captions"/></svg></span><div><strong>顯示字幕</strong></div><button class="switch is-on" data-toggle="captions" aria-pressed="true"><span></span></button></div>
+                </div>
+              </section>
+
+              <section class="settings-group">
+                <h2 class="group-title">隱私與家人</h2>
+                <div class="setting-card">
+                  <div class="setting-row"><span class="setting-icon setting-icon--sage"><svg><use href="#i-image"/></svg></span><div><strong>顯示我的照片</strong></div><button class="switch" data-toggle="showPhoto" aria-pressed="false"><span></span></button></div>
+                  <div class="setting-divider"></div>
+                  <button class="setting-row setting-row--link" data-sheet="privacy-sheet"><span class="setting-icon setting-icon--clay"><svg><use href="#i-lock"/></svg></span><div><strong>家人可見的內容</strong></div><svg><use href="#i-chev-right"/></svg></button>
+                  <div class="setting-divider"></div>
+                  <button class="setting-row setting-row--link" data-sheet="add-family-sheet"><span class="setting-icon setting-icon--honey"><svg><use href="#i-user-plus"/></svg></span><div><strong>邀請家人</strong></div><svg><use href="#i-chev-right"/></svg></button>
+                </div>
+              </section>
+
+              <section class="settings-group">
+                <h2 class="group-title">舒適度</h2>
+                <div class="setting-card">
+                  <div class="setting-row"><span class="setting-icon setting-icon--clay"><svg><use href="#i-sun"/></svg></span><div><strong>高對比</strong></div><button class="switch" data-toggle="contrast" aria-pressed="false"><span></span></button></div>
+                  <div class="setting-divider"></div>
+                  <button class="setting-row setting-row--link" data-sheet="profile-sheet"><span class="setting-icon setting-icon--peach"><svg><use href="#i-users"/></svg></span><div><strong>我的資料</strong></div><svg><use href="#i-chev-right"/></svg></button>
+                </div>
+              </section>
+
+              <div class="settings-about"><span class="brand-mark brand-mark--small"><svg><use href="#i-book"/></svg></span><p><strong>Memora</strong></p></div>
+              <button class="sign-out" data-go="welcome">登出</button>
+              <div class="bottom-air"></div>
+            </div>
+          </section>
+
+          <!-- 11 &middot; WELCOME -->
+          <section class="screen screen--welcome" data-screen="welcome" data-tabs="false" aria-label="歡迎來到 Memora">
+            <div class="welcome-bg" aria-hidden="true"><span class="welcome-arch"></span><span class="welcome-sun"></span></div>
+            <div class="welcome-inner">
+              <div class="welcome-brand"><span class="brand-mark"><svg><use href="#i-book"/></svg></span><span>memora</span></div>
+              <div class="welcome-copy">
+                <h1>每一段回憶<br>都值得被留下。</h1>
+              </div>
+              <img class="welcome-momo" src="assets/momo.png" alt="Momo，Memora 的書本夥伴">
+              <div class="welcome-actions">
+                <button class="primary-button" data-go="home"><svg><use href="#i-arrow-right"/></svg> 以 Maggie 繼續</button>
+                <button class="secondary-button" data-sheet="join-family-sheet"><svg><use href="#i-users"/></svg> 用家庭代碼加入</button>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <nav class="tabbar" id="tabbar" aria-label="主要導覽">
+          <button class="tab is-active" data-go="home"><span class="tab-icon"><svg><use href="#i-home"/></svg></span><span>首頁</span></button>
+          <button class="tab" data-go="family"><span class="tab-icon"><svg><use href="#i-users"/></svg><i class="tab-badge" id="familyBadge">2</i></span><span>家人</span></button>
+          <button class="tab" data-go="book"><span class="tab-icon"><svg><use href="#i-book"/></svg></span><span>回憶</span></button>
+          <button class="tab" data-go="settings"><span class="tab-icon"><svg><use href="#i-settings"/></svg></span><span>設定</span></button>
+        </nav>
+
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+        <div class="sheet-scrim" id="sheetScrim" hidden></div>
+        <div class="sheet-layer" id="sheetLayer" aria-live="polite"></div>
+      </div>
+      <div class="device-island" aria-hidden="true"><span></span></div>
+      <div class="device-button device-button--power" aria-hidden="true"></div>
+      <div class="device-button device-button--vol" aria-hidden="true"></div>
+    </div>
+    <p class="stage-caption"><span>390 &times; 844</span> iPhone &middot; iOS 27 direction <span class="dot">&middot;</span> Tap anything</p>
+  </main>
+
+  <aside class="notes" aria-label="設計註記">
+    <div class="notes-top">
+      <span class="notes-kicker">Design field notes</span>
+      <span class="notes-count" id="notesCount">01 / 11</span>
+    </div>
+    <div class="notes-body" id="notesBody">
+      <h2>Home, without the homework.</h2>
+      <p>Three large, unmistakable ways to begin &mdash; talk, photo, music &mdash; plus one unfinished memory. Nothing else competes for attention.</p>
+      <h3>Made for older eyes &amp; hands</h3>
+      <ul>
+        <li>20 px body text as the minimum; 56 px tap targets.</li>
+        <li>No tiny icons without a plain-language label.</li>
+        <li>The primary action is always the warmest colour on the screen.</li>
+      </ul>
+      <div class="note-quote">&ldquo;Warmth is a feature, not decoration.&rdquo;</div>
+    </div>
+    <div class="notes-access">
+      <div class="access-head"><span>Reading comfort</span><strong id="notesSize">22 pt</strong></div>
+      <input type="range" id="notesRange" min="20" max="30" step="1" value="22" aria-label="預覽文字大小">
+      <div class="access-scale"><span>A</span><span>Aa</span><span>A</span></div>
+      <p>This preview is live. The same control lives in Settings.</p>
+    </div>
+    <p class="notes-foot">Memora &middot; UI concept <span>&middot;</span> English</p>
+  </aside>
+</div>
+
+<div class="mobile-hint" id="mobileHint">Desktop shows design notes &middot; open on a phone for the full-screen app</div>
+
+<script src="i18n-zh.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
+
